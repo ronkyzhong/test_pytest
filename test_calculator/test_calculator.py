@@ -3,35 +3,34 @@ import json
 import pytest
 import yaml
 import json
+
 from calculator.calculator import Calculator
 
-with open("../data/test_calculator_data.yaml", 'r') as f:
+with open("../data/test_calculator_data.yml", 'r') as f:
     data = yaml.safe_load(f)
 
 
 class TestCalculator:
-    @pytest.mark.parametrize('a,b,result', data['add'],
-                             ids=("int", "float", "int_and_float", "negative_and_int", "negative"))
+    @pytest.mark.parametrize('a,b,result', data['add'].values(),
+                             ids=data['add'].keys())
     def test_add(self, a, b, result, calc):
         cal = Calculator(a, b)
         assert result == cal.add()
 
-    @pytest.mark.parametrize('a,b,result', data['sub'],
-                             ids=("int", "float", "int_and_float", "negative_and_int", "negative"))
+    @pytest.mark.parametrize('a,b,result', data['sub'].values(),
+                             ids=data['sub'].keys())
     def test_sub(self, a, b, result, calc):
         cal = Calculator(a, b)
         assert result == cal.sub()
 
-    @pytest.mark.parametrize('a,b,result', data['mul'],
-                             ids=("int", "float", "int_and_float", "negative_and_int", "negative"))
+    @pytest.mark.parametrize('a,b,result', data['mul'].values(),
+                             ids=data['mul'].keys())
     def test_mul(self, a, b, result, calc):
         cal = Calculator(a, b)
         assert result == cal.mul()
 
-    @pytest.mark.parametrize('a,b,result', data['div'],
-                             ids=(
-                                     "int", "float", "int_and_float", "negative_and_int", "negative", "div is 0",
-                                     "div is 0.0"))
+    @pytest.mark.parametrize('a,b,result', data['div'].values(),
+                             ids=data['div'].keys())
     def test_div(self, a, b, result, calc):
         cal = Calculator(a, b)
         assert result == cal.div()
