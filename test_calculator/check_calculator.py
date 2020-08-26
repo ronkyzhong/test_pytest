@@ -10,10 +10,10 @@ with open("../data/test_calculator_data.yml", 'r') as f:
     data = yaml.safe_load(f)
 
 
-class TestCalculator:
+class CheckCalculator:
     @pytest.mark.parametrize('a,b,result', data['add'].values(),
                              ids=data['add'].keys())
-    def test_add(self, a, b, result, calc):
+    def check_add(self, a, b, result, calc):
         cal = Calculator(a, b)
         assert result == cal.add()
 
